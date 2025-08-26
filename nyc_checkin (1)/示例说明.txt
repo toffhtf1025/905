@@ -1,0 +1,41 @@
+输入数据结构
+输入数据应为结构.csv的.txt文件。第一列（第 0 列）表示地理对象的唯一标识符。以下列指示地理对象的属性。最后几个串联指示地理对象的最近邻居。
+
+例如，给定以下两个对象：
+0,4.471435163732493,2.158530256342078,96.54097808132826,1016.5109582462767,997.3221602361555,41,78,45   
+1,2.8090243052935353,2.1454885080772383,68.55061966023295,1701.5536144719163,1001.8594793592364,11,80,35   
+
+第 0 列表示对象的 ID，第 1-5 列表示地理对象的属性，第 6-8 列表示最近邻。对于对象 0，它的最近邻是对象 41，它的第二个最近邻是对象 78，它的第三个最近邻是对象 45。
+
+执行 Python 代码
+要对您自己的数据集执行 STICC，请在 python 中运行以下代码。
+
+用法：
+python STICC_main.py --fname=[input_data] --oname=[output_data] \
+--attr_idx_start=[attr_idx_start] --attr_idx_end=[attr_idx_end] \
+--spatial_idx_start=[spatial_idx_start] --spatial_idx_end=[spatial_idx_end] --spatial_radius=[spatial_radius] \
+--number_of_clusters=[number_of_clusters] --lambda_parameter=[lambda_parameter] --beta=[beta] --maxIters=[maxIters]
+
+--fname, input data name
+--oname, output file name
+--attr_idx_start, attribute start index
+--attr_idx_end, attribute end index
+--spatial_idx_start, neighboring object start index
+--spatial_idx_end, neighboring object end index
+--spatial_radius, radius of subregion
+--number_of_clusters, number of clusters
+--lambda_parameter, lambda
+--beta, beta
+--maxIters, maximum iterations
+
+示例：
+对空间半径=3且beta=3的synthetic_data.txt执行STICC。
+
+python STICC_main.py --fname=synthetic_data.txt --oname=result_synthetic_data.txt \
+--attr_idx_start=1 --attr_idx_end=5 --spatial_idx_start=6 --spatial_idx_end=8 \
+--spatial_radius=3 --number_of_clusters 7 --lambda_parameter 0.01 --beta 3 --maxIters 20 
+
+如果遇到以下错误：
+numpy.linalg.LinAlgError: Eigenvalues did not converge
+
+A potential solution is to standardize your dataset.
